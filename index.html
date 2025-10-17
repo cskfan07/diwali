@@ -1,284 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Celebration.ai - Diwali Wishes</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body { overflow: hidden; background-color: black; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celebration.ai - Diwali Wishes</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body { overflow: hidden; background-color: black; font-family: sans-serif; }
 
-    nav {
-      background-color: rgb(22,16,16);
-      color: antiquewhite;
-      display: flex;
-      align-items: center;
-      padding: 8px 16px;
-      z-index: 10;
-      position: relative;
-    }
-    #logo { font-size: 20px; font-weight: 700; color: white; }
-    #cr { color: red; }
+nav {
+  background-color: rgb(22,16,16);
+  color: antiquewhite;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  z-index: 10;
+  position: relative;
+}
+#logo { font-size: 20px; font-weight: 700; color: white; }
+#cr { color: red; }
 
-    .container {
-      height: calc(100vh - 48px);
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      position: relative;
-      background-image: url('back.jpg');
-      background-size: cover;
-      background-position: center;
-    }
+.container {
+  height: calc(100vh - 48px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  background-image: url('back.jpg');
+  background-size: cover;
+  background-position: center;
+}
 
-    .text {
-      display: inline-block;
-      background-color: #41caea;
-      width: 260px;
-      height: 36px;
-      padding: 6px 10px;
-      border-radius: 6px;
-      border: 2px solid #c2f900;
-      text-align: center;
-      font-size: 14px;
-      position: relative;
-      z-index: 5;
-    }
+.text {
+  display: inline-block;
+  background-color: #41caea;
+  width: 260px;
+  height: 36px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 2px solid #c2f900;
+  text-align: center;
+  font-size: 14px;
+  position: relative;
+  z-index: 5;
+}
 
-    .ok {
-      height: 38px;
-      width: 80px;
-      border-radius: 25px;
-      border: 3px solid rgb(252,0,0);
-      background-color: #54e9b7;
-      font-size: 15px;
-      cursor: pointer;
-      position: relative;
-      margin-top: 15px;
-      z-index: 5;
-    }
+.ok {
+  height: 38px;
+  width: 80px;
+  border-radius: 25px;
+  border: 3px solid rgb(252,0,0);
+  background-color: #54e9b7;
+  font-size: 15px;
+  cursor: pointer;
+  position: relative;
+  margin-top: 15px;
+  z-index: 5;
+}
 
-    #retryBtn {
-      display: none;
-      background-color: #ffda79;
-      border-color: #ff3b3b;
-      margin-top: 15px;
-    }
+#retryBtn {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 42px;
+  width: 120px;
+  border-radius: 25px;
+  border: 3px solid rgb(255, 59, 59);
+  background-color: #ffda79;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 9999;
+  touch-action: manipulation;
+}
 
-    #myVdo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100vw;
-      z-index: 3;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(black 70%, #000000ee);
-      padding: 10px;
-    }
+#myVdo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 3;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(black 70%, #000000ee);
+  padding: 10px;
+}
 
-    video {
-      width: 95%;
-      height: 95%;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
-      background-color: black;
-    }
+video {
+  width: 95%;
+  height: 95%;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+  background-color: black;
+}
 
-    footer {
-      position: absolute;
-      bottom: 6px;
-      left: 6px;
-      z-index: 6;
-    }
+footer {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  z-index: 6;
+}
 
-    #fireworksCanvas {
-      position: fixed;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 2;
-    }
-  </style>
+#fireworksCanvas {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+</style>
 </head>
 <body>
-  <nav>
-    <div id="logo">301<span id="cr">.</span>...</div>
-  </nav>
+<nav>
+  <div id="logo">301<span id="cr">.</span>...</div>
+</nav>
 
-  <canvas id="fireworksCanvas"></canvas>
+<canvas id="fireworksCanvas"></canvas>
 
-  <div class="container">
-    <div id="myVdo"></div>
+<div class="container">
+  <div id="myVdo"></div>
+  <input type="text" placeholder="Enter Your Name" class="text" id="nameInput">
+  <button id="okBtn" class="ok" type="button">OK</button>
+</div>
 
-    <input type="text" placeholder="Enter Your Name" class="text" id="nameInput" />
-    <button id="okBtn" class="ok" type="button">OK</button>
-    <button id="retryBtn" class="ok" type="button">Retry</button>
-  </div>
+<!-- Retry button outside container -->
+<button id="retryBtn">Retry</button>
 
-  <footer>
-    <a href="https://www.hitwebcounter.com" target="_blank" rel="noopener">
-      <img id="countr"
-           src="https://hitwebcounter.com/counter/counter.php?page=8352639&style=0032&nbdigits=5&type=page&initCount=0"
-           title="Free Counter" alt="web counter" border="0" />
-    </a>
-  </footer>
+<footer>
+  <a href="https://www.hitwebcounter.com" target="_blank" rel="noopener">
+    <img id="countr"
+         src="https://hitwebcounter.com/counter/counter.php?page=8352639&style=0032&nbdigits=5&type=page&initCount=0"
+         title="Free Counter" alt="web counter" border="0" />
+  </a>
+</footer>
 
-  <script>
-    const video = document.createElement('video');
-    video.src ='hapy.mp4';
-    video.controls = false;
-    video.autoplay = false;
-    video.setAttribute('playsinline', '');
+<script>
+const video = document.createElement('video');
+video.src ='hapy.mp4';
+video.controls = false;
+video.autoplay = false;
+video.setAttribute('playsinline', '');
 
-    const div = document.getElementById('myVdo');
-    const okBtn = document.getElementById('okBtn');
-    const nameInput = document.getElementById('nameInput');
-    const retryBtn = document.getElementById('retryBtn');
+const div = document.getElementById('myVdo');
+const okBtn = document.getElementById('okBtn');
+const nameInput = document.getElementById('nameInput');
+const retryBtn = document.getElementById('retryBtn');
 
-    okBtn.addEventListener('click', startGreeting);
-    retryBtn.addEventListener('click', resetGreeting);
+okBtn.addEventListener('click', startGreeting);
+retryBtn.addEventListener('click', resetGreeting);
 
-    function startGreeting() {
-      const name = nameInput.value.trim();
-      if (!name) {
-        alert("Please Enter Your Name!..."); 
-        return;
-      }
+function startGreeting() {
+  const name = nameInput.value.trim();
+  if(!name){ alert("Please Enter Your Name!..."); return; }
 
-      // Save to Google Sheet
-      fetch("https://script.google.com/macros/s/AKfycbw7v8R5iDOD6g7ciX3y_v9D9cFkvfjHEnwsxhsKBP3km2DNsfnnQlyBKL9WlD5Yk40EfQ/exec", {
-        method: "POST",
-        body: JSON.stringify({ name })
-      })
-      .then(res => res.text())
-      .then(data => console.log("Saved to Google Sheet:", data))
-      .catch(err => console.error("Error:", err));
+  // Save to Google Sheet
+  fetch("https://script.google.com/macros/s/AKfycbw7v8R5iDOD6g7ciX3y_v9D9cFkvfjHEnwsxhsKBP3km2DNsfnnQlyBKL9WlD5Yk40EfQ/exec", {
+    method: "POST",
+    body: JSON.stringify({ name })
+  })
+  .then(res => res.text())
+  .then(data => console.log("Saved:", data))
+  .catch(err => console.error("Error:", err));
 
-      startFireworks();
-      alert(`🎆 Happy Diwali ${name} ji! 🎇\n\nMay your life be filled with light, joy, and prosperity! 🌟\n\n-301`);
+  startFireworks();
+  alert(`🎆 Happy Diwali ${name} ji! 🎇\n\nMay your life be filled with light, joy, and prosperity! 🌟\n\n-301`);
 
-      stopFireworksAfter(2000);
-      setTimeout(() => {
-        div.style.display = "flex";
-        div.appendChild(video);
-        video.play().catch(() => { video.controls = true; });
-        nameInput.style.opacity = 0;
-        okBtn.style.opacity = 0;
-      }, 2000);
-    }
+  stopFireworksAfter(2000);
+  setTimeout(()=>{
+    div.style.display = "flex";
+    div.appendChild(video);
+    video.play().catch(()=>{video.controls=true;});
+    nameInput.style.opacity = 0;
+    okBtn.style.opacity = 0;
+  }, 2000);
+}
 
-    // Retry function
-    function resetGreeting() {
-      video.pause();
-      video.currentTime = 0;
-      div.style.display = "none";
-      retryBtn.style.display = "none";
-      nameInput.style.opacity = 1;
-      okBtn.style.opacity = 1;
-      nameInput.value = "";
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-    }
+// Retry function
+function resetGreeting() {
+  video.pause();
+  video.currentTime = 0;
+  div.style.display = "none";
+  retryBtn.style.display = "none";
+  nameInput.style.opacity = 1;
+  okBtn.style.opacity = 1;
+  nameInput.value = "";
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+}
 
-    // Show Retry button when video ends
-    video.addEventListener('ended', () => {
-      retryBtn.style.display = "inline-block";
-    });
+// Show Retry button when video ends
+video.addEventListener('ended', () => {
+  retryBtn.style.display = "block";
+});
 
-    /* ---------------------------
-       Fireworks effect
-       --------------------------- */
-    const canvas = document.getElementById('fireworksCanvas');
-    const ctx = canvas.getContext('2d');
-    let activeParticles = [];
-    let fireworkInterval;
-    let running = false;
+/* Fireworks */
+const canvas = document.getElementById('fireworksCanvas');
+const ctx = canvas.getContext('2d');
+let activeParticles = [], fireworkInterval, running=false;
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
+function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+window.addEventListener('resize', resize);
+resize();
 
-    class Particle {
-      constructor(x, y, color, vel, life, size) {
-        this.x = x; this.y = y;
-        this.color = color;
-        this.vx = vel.x; this.vy = vel.y;
-        this.life = life; this.totalLife = life;
-        this.size = size;
-      }
-      update() {
-        this.vy += 0.02;
-        this.vx *= 0.995;
-        this.vy *= 0.995;
-        this.x += this.vx;
-        this.y += this.vy;
-        this.life--;
-      }
-      draw(ctx) {
-        const alpha = Math.max(0, this.life / this.totalLife);
-        ctx.globalAlpha = alpha;
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      }
-    }
+class Particle {
+  constructor(x,y,color,vel,life,size){ this.x=x; this.y=y; this.color=color; this.vx=vel.x; this.vy=vel.y; this.life=life; this.totalLife=life; this.size=size;}
+  update(){ this.vy+=0.02; this.vx*=0.995; this.vy*=0.995; this.x+=this.vx; this.y+=this.vy; this.life--;}
+  draw(ctx){ const alpha=Math.max(0,this.life/this.totalLife); ctx.globalAlpha=alpha; ctx.fillStyle=this.color; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); ctx.globalAlpha=1;}
+}
 
-    function explosion(x, y, hue, count = 80) {
-      const p = [];
-      for (let i = 0; i < count; i++) {
-        const ang = Math.random()*Math.PI*2;
-        const sp = Math.random()*3 + 1.5;
-        const vel = {x: Math.cos(ang)*sp, y: Math.sin(ang)*sp};
-        const color = `hsl(${hue + Math.random()*40 - 20},100%,60%)`;
-        p.push(new Particle(x,y,color,vel,Math.random()*40+40,Math.random()*2.5+1));
-      }
-      return p;
-    }
+function explosion(x,y,hue,count=80){ 
+  const p=[]; 
+  for(let i=0;i<count;i++){ 
+    const ang=Math.random()*Math.PI*2;
+    const sp=Math.random()*3+1.5;
+    const vel={x:Math.cos(ang)*sp, y:Math.sin(ang)*sp};
+    const color=`hsl(${hue+Math.random()*40-20},100%,60%)`;
+    p.push(new Particle(x,y,color,vel,Math.random()*40+40,Math.random()*2.5+1));
+  } 
+  return p; 
+}
 
-    function animate() {
-      if (!running) return;
-      ctx.fillStyle = 'rgba(0,0,0,0.12)';
-      ctx.fillRect(0,0,canvas.width,canvas.height);
-      for (let i=activeParticles.length-1;i>=0;i--){
-        const prt = activeParticles[i];
-        prt.update(); prt.draw(ctx);
-        if (prt.life<=0) activeParticles.splice(i,1);
-      }
-      requestAnimationFrame(animate);
-    }
+function animate(){
+  if(!running) return;
+  ctx.fillStyle='rgba(0,0,0,0.12)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  for(let i=activeParticles.length-1;i>=0;i--){
+    const prt=activeParticles[i];
+    prt.update(); prt.draw(ctx);
+    if(prt.life<=0) activeParticles.splice(i,1);
+  }
+  requestAnimationFrame(animate);
+}
 
-    function startFireworks() {
-      if (running) return;
-      running = true;
-      animate();
-      fireworkInterval = setInterval(() => {
-        const hue = Math.floor(Math.random()*360);
-        const isWide = window.innerWidth > 768;
-        const x = isWide
-          ? (Math.random() > 0.5 ? canvas.width * 0.1 : canvas.width * 0.9)
-          : (Math.random()*canvas.width*0.8 + canvas.width*0.1);
-        const y = Math.random()*canvas.height*0.5 + canvas.height*0.1;
-        activeParticles.push(...explosion(x, y, hue, 100));
-      }, 400);
-    }
+function startFireworks(){
+  if(running) return;
+  running=true;
+  animate();
+  fireworkInterval=setInterval(()=>{
+    const hue=Math.floor(Math.random()*360);
+    const isWide=window.innerWidth>768;
+    const x=isWide ? (Math.random()>0.5 ? canvas.width*0.1 : canvas.width*0.9) : (Math.random()*canvas.width*0.8 + canvas.width*0.1);
+    const y=Math.random()*canvas.height*0.5 + canvas.height*0.1;
+    activeParticles.push(...explosion(x,y,hue,100));
+  },400);
+}
 
-    function stopFireworksAfter(ms) {
-      setTimeout(() => {
-        clearInterval(fireworkInterval);
-        running = false;
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-      }, ms);
-    }
-  </script>
+function stopFireworksAfter(ms){
+  setTimeout(()=>{
+    clearInterval(fireworkInterval);
+    running=false;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+  }, ms);
+}
+</script>
 </body>
 </html>
