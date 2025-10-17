@@ -60,28 +60,35 @@
       z-index: 5;
     }
 
-    #myVdo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: 3;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(black 70%, #000000ee);
-  padding: 10px; /* adds slight spacing on mobile & desktop */
-}
+    #retryBtn {
+      display: none;
+      background-color: #ffda79;
+      border-color: #ff3b3b;
+      margin-top: 15px;
+    }
 
-video {
-  width: 95%;
-  height: 95%;
-  object-fit: contain; /* ensures full video fits without cutting edges */
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
-  background-color: black;
-}
+    #myVdo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      z-index: 3;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(black 70%, #000000ee);
+      padding: 10px;
+    }
+
+    video {
+      width: 95%;
+      height: 95%;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+      background-color: black;
+    }
 
     footer {
       position: absolute;
@@ -111,6 +118,7 @@ video {
 
     <input type="text" placeholder="Enter Your Name" class="text" id="nameInput" />
     <button id="okBtn" class="ok" type="button">OK</button>
+    <button id="retryBtn" class="ok" type="button">Retry</button>
   </div>
 
   <footer>
@@ -131,17 +139,19 @@ video {
     const div = document.getElementById('myVdo');
     const okBtn = document.getElementById('okBtn');
     const nameInput = document.getElementById('nameInput');
+    const retryBtn = document.getElementById('retryBtn');
 
     okBtn.addEventListener('click', startGreeting);
+    retryBtn.addEventListener('click', resetGreeting);
 
     function startGreeting() {
       const name = nameInput.value.trim();
       if (!name) {
-        alert("Please Enter Your Name!...");
+        alert("Please Enter Your Name!..."); 
         return;
       }
 
-      // ✅ Save to Google Sheet
+      // Save to Google Sheet
       fetch("https://script.google.com/macros/s/AKfycbw7v8R5iDOD6g7ciX3y_v9D9cFkvfjHEnwsxhsKBP3km2DNsfnnQlyBKL9WlD5Yk40EfQ/exec", {
         method: "POST",
         body: JSON.stringify({ name })
@@ -150,11 +160,9 @@ video {
       .then(data => console.log("Saved to Google Sheet:", data))
       .catch(err => console.error("Error:", err));
 
-      // Step 1: Start fireworks + show message
       startFireworks();
-      alert(`🎆 Happy Diwali ${name} ji! 🎇\n\nMay your life be filled with light, joy, and prosperity! 🌟\n \n -301`);
+      alert(`🎆 Happy Diwali ${name} ji! 🎇\n\nMay your life be filled with light, joy, and prosperity! 🌟\n\n-301`);
 
-      // Step 2: Stop fireworks and play video full-screen
       stopFireworksAfter(2000);
       setTimeout(() => {
         div.style.display = "flex";
@@ -165,8 +173,25 @@ video {
       }, 2000);
     }
 
+    // Retry function
+    function resetGreeting() {
+      video.pause();
+      video.currentTime = 0;
+      div.style.display = "none";
+      retryBtn.style.display = "none";
+      nameInput.style.opacity = 1;
+      okBtn.style.opacity = 1;
+      nameInput.value = "";
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
+
+    // Show Retry button when video ends
+    video.addEventListener('ended', () => {
+      retryBtn.style.display = "inline-block";
+    });
+
     /* ---------------------------
-       Fireworks effect (desktop sides)
+       Fireworks effect
        --------------------------- */
     const canvas = document.getElementById('fireworksCanvas');
     const ctx = canvas.getContext('2d');
@@ -239,12 +264,9 @@ video {
       fireworkInterval = setInterval(() => {
         const hue = Math.floor(Math.random()*360);
         const isWide = window.innerWidth > 768;
-
-        // Fireworks appear at sides for wide screens, center for mobile
         const x = isWide
           ? (Math.random() > 0.5 ? canvas.width * 0.1 : canvas.width * 0.9)
           : (Math.random()*canvas.width*0.8 + canvas.width*0.1);
-
         const y = Math.random()*canvas.height*0.5 + canvas.height*0.1;
         activeParticles.push(...explosion(x, y, hue, 100));
       }, 400);
